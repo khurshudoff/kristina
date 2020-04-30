@@ -11,12 +11,23 @@
 	</div>
 
 	<button id="submit">ответить</button>
-	<button id="reload">обновить</button>
 
 	<div id = "last">
 		Последние ответы:
 	</div>
 </body>
+<style type="text/css">
+	html {
+		font-size: 25px;
+	}
+	#last {
+		font-size: 18px;
+	}
+	#inp {
+		font-size: 22px;
+		width: 100px;
+	}
+</style>
 <script>
 	var idx = 1;
 	var real = 0;
@@ -37,27 +48,28 @@
 		if (oper == 0) {
 			oper = "*";
 			var el1 = Math.floor(Math.random() * Math.floor(25));
-			var el2 = Math.floor(Math.random() * Math.floor(25));
+			var el2 = ((Math.floor(Math.random() * Math.floor(25)) + 5) * 2) % 25;
 			real = el1 * el2;
 		}
 		if (oper == 1) {
 			oper = "-";
 			var el1 = Math.floor(Math.random() * Math.floor(1000));
-			var el2 = Math.floor(Math.random() * Math.floor(1000));
+			var el2 = ((Math.floor(Math.random() * Math.floor(1000)) + 5) * 2) % 1000;
 			if (el1 < el2) {
 				tmp = el1;
 				el1 = el2;
-				el2 = el1;
+				el2 = tmp;
 			}
 			real = el1 - el2;
 		}
 		if (oper == 2) {
 			oper = "+";
 			var el1 = Math.floor(Math.random() * Math.floor(1000));
-			var el2 = Math.floor(Math.random() * Math.floor(1000));
+			var el2 = ((Math.floor(Math.random() * Math.floor(1000)) + 5) * 2) % 1000;
 			real = el1 + el2;
 		}
 
+		inp = document.getElementById("inp").value = "";
 
 		document.getElementById("primer").innerText = String(el1) + " " + String(oper) + " " + String(el2) + " = ";
 	}
@@ -66,5 +78,3 @@
 	reload();
 
 </script>
-
-
