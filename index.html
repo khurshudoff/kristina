@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--[if lt IE 8]><html class="no-js ie ltie8 ltie9 ltie10" lang="ru"><![endif]-->
+<!--[if IE 8]><html class="no-js ie ie8 ltie9 ltie10" lang="ru"><![endif]-->
+<!--[if IE 9]><html class="no-js ie gtie8 ie9 ltie10" lang="ru"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js" lang="ru"><!--><![endif]-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+	<!-- поддержка html5-тегов, css3-селекторов, медиа-запросов в IE<=8 -->
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<script src="js/respond.min.js"></script>
+		<script src="js/nwmatcher-1.2.5.js"></script>
+		<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+
+	<!-- основные скрипты -->
+
+	<meta name="description" content="Your description">
+  	<meta name="author" content="Author Name">
+	<title>Page Title</title>
+</head>
+<body>
+	<div>
+		<span id="primer">Нажми обновить</span> 
+		<input id="inp" type="number">
+	</div>
+
+	<button id="submit">ответить</button>
+	<button id="reload">обновить</button>
+
+	<div id = "last">
+		Последние ответы:
+	</div>
+</body>
+<script>
+	var idx = 1;
+	var real = 0;
+	function submit() {
+		inp = document.getElementById("inp").value;
+		is_cor = "F";
+		if (String(real) == inp) {
+			is_cor = "T";
+		}
+		document.getElementById("last").innerText += "\n" + is_cor + " " + String(idx) + ": Ваш ответ: " + inp + ";   Правильный ответ: " + String(real);
+		idx += 1;
+	  	alert("Ваш ответ: " + inp + "\n" + "Правильный ответ: " + String(real));
+	  	reload();
+	}
+
+	function reload() {
+		var oper = Math.floor(Math.random() * Math.floor(3)) 
+		if (oper == 0) {
+			oper = "*";
+			var el1 = Math.floor(Math.random() * Math.floor(25));
+			var el2 = Math.floor(Math.random() * Math.floor(25));
+			real = el1 * el2;
+		}
+		if (oper == 1) {
+			oper = "-";
+			var el1 = Math.floor(Math.random() * Math.floor(1000));
+			var el2 = Math.floor(Math.random() * Math.floor(1000));
+			if (el1 < el2) {
+				tmp = el1;
+				el1 = el2;
+				el2 = el1;
+			}
+			real = el1 - el2;
+		}
+		if (oper == 2) {
+			oper = "+";
+			var el1 = Math.floor(Math.random() * Math.floor(1000));
+			var el2 = Math.floor(Math.random() * Math.floor(1000));
+			real = el1 + el2;
+		}
+
+
+		document.getElementById("primer").innerText = String(el1) + " " + String(oper) + " " + String(el2) + " = ";
+	}
+
+	document.getElementById("submit").addEventListener("click", submit);
+	reload();
+
+</script>
+
+
